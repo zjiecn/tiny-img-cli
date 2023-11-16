@@ -1,17 +1,25 @@
+const path = require("path");
 const fs = require("fs");
+const { readFile } = require('node:fs/promises');
 const tinify = require("tinify");
 tinify.key = "2jxgPRqGtMQ0H3jCXr2FfvdJhFbS09Kl";
+// const rootDir = process.cwd();
+module.exports = async function(url) {
+  try {
+    // const targetPath = path.join(rootDir, url)
+    const res = await readFile(url);
+    compress(res, url)
+  } catch (error) {
+    console.log(error)
+  }
+}
 
-
-module.exports = function(url) {
-    fs.readFile(url, function(err, sourceData) {
-        if (err) throw err;
-        tinify.fromBuffer(sourceData).toBuffer(function(err, resultData) {
-          if (err) throw err;
-          fs.writeFile(`./2.png`, resultData, (err) => {
-            if (err) throw err;
-            console.log('The file has been saved!');
-          });
-        });
-      });
+function compress(sourceData, url) {
+  tinify.fromBuffer(sourceData).toBuffer(async function(err, resultData) {
+    if (err) throw err;
+    fs.writeFile(url, resultData, (err) => {
+      if (err) throw err;
+      console.log('The file has been saved!');
+    });
+  });
 }
