@@ -1,0 +1,25 @@
+{
+  "name": "png-tiny-cli",
+  "version": "1.0.1",
+  "description": "png压缩工具",
+  "main": "index.js",
+  "bin": {
+    "tiny": "./index.js"
+  },
+  "files": [
+    "bin"
+  ],
+  "scripts": {
+    "pub": "npm publish --registry=https://registry.npmjs.org/",
+    "test": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "chokidar": "^3.5.3",
+    "commander": "^11.0.0",
+    "https": "^1.0.0",
+    "tinify": "^1.7.1"
+  }
+}
