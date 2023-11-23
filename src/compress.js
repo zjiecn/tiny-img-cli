@@ -5,16 +5,16 @@ const tinify = require("tinify");
 // tinify.key = "2jxgPRqGtMQ0H3jCXr2FfvdJhFbS09Kl";
 module.exports = async function(url) {
   try {
-    const key = fs.readFileSync(path.join(__dirname, './key.json'), 'utf8');
-    if (!key) {
-      console.log(chalk.red("请先使用 -i 设置tinypng API key"));
+    const config = fs.readFileSync(path.join(__dirname, './key.json'), 'utf8');
+    if (!config || !config.key) {
+      throw new Error("请先使用'tiny -i <key>'命令设置tinypng API key");
     }
     tinify.key = JSON.parse(key).key;
     
     const res = await readFile(url);
     compress(res, url)
   } catch (error) {
-    console.log(error)
+    console.log(chalk.red("压缩失败，请重试！"));
   }
 }
 
@@ -23,6 +23,7 @@ function compress(sourceData, url) {
     if (err) throw err;
     fs.writeFile(url, resultData, (err) => {
       if (err) throw err;
+      console.log(url)
       console.log('The file has been saved!');
     });
   });

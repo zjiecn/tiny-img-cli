@@ -6,10 +6,9 @@ const chalk = require("chalk");
 
 module.exports = function({url, file}) {
     // 读取key
-    const key = fs.readFileSync(path.join(__dirname, './key.json'), 'utf8');
-    if (!key) {
-        console.log(chalk.red("请先使用 -i 设置tinypng API key"));
-        return;
+    const config = fs.readFileSync(path.join(__dirname, './key.json'), 'utf8');
+    if (!config || !config.key) {
+        throw new Error("请先使用'tiny -i <key>'命令设置tinypng API key");
     }
     if (url) {
         compress(url);

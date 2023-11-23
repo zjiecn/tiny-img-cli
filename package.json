@@ -1,13 +1,13 @@
 {
-  "name": "png-tiny-cli",
-  "version": "1.0.1",
+  "name": "png-compressor-cli",
+  "version": "1.0.3",
   "description": "png压缩工具",
   "main": "index.js",
   "bin": {
     "tiny": "./index.js"
   },
   "files": [
-    "bin"
+    "src"
   ],
   "scripts": {
     "pub": "npm publish --registry=https://registry.npmjs.org/",
