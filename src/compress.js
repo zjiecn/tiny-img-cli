@@ -2,18 +2,20 @@ const path = require("path");
 const fs = require("fs");
 const { readFile } = require('node:fs/promises');
 const tinify = require("tinify");
-// tinify.key = "2jxgPRqGtMQ0H3jCXr2FfvdJhFbS09Kl";
+const chalk =  require('chalk')
+// tchalkinify.key = "2jxgPRqGtMQ0H3jCXr2FfvdJhFbS09Kl";
 module.exports = async function(url) {
   try {
     const config = fs.readFileSync(path.join(__dirname, './key.json'), 'utf8');
-    if (!config || !config.key) {
+    if (!config || !JSON.parse(config)?.key) {
       throw new Error("请先使用'tiny -i <key>'命令设置tinypng API key");
     }
-    tinify.key = JSON.parse(key).key;
+    tinify.key = JSON.parse(config).key;
     
     const res = await readFile(url);
     compress(res, url)
   } catch (error) {
+    console.log(error)
     console.log(chalk.red("压缩失败，请重试！"));
   }
 }
