@@ -1,6 +1,6 @@
 {
   "name": "png-compressor-cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "png压缩工具",
   "main": "index.js",
   "bin": {
